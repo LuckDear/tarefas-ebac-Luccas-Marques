@@ -1,9 +1,12 @@
+
 public class Carro {
+    // Criando variaveis
     private String modelo;
     private int ano;
     private String cor;
     private String marca;
 
+    // Criando getters e setters
     public String getModelo(String modelo) {
         return modelo;
     }
@@ -35,6 +38,8 @@ public class Carro {
     public void setMarca(String marca) {
         this.marca = marca;
     }
+
+    // escreve na tela parametros recebidos das variaveis do carro
     public void obterInformacoes() {
         System.out.println("Carro: " + getModelo(modelo) + ", Cor: " + getCor(cor) + ", Ano: " + getAno(ano) + ", marca: " + getMarca(marca));
     }
