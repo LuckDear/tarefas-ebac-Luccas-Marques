@@ -1,2 +1,6 @@
-package Domain;public class Persistente {
+package Domain;
+
+public interface Persistente {
+
+    public Long getCodigo();
 }

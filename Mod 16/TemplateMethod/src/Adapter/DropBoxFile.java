@@ -1,2 +1,10 @@
-package Adapter;public class DropBoxFile {
+package Adapter;
+
+public class DropBoxFile {
+    public DropBoxFile(String absolutePath){
+
+    }
+    public String getLocalPath(){
+        return "/tmp";
+    }
 }

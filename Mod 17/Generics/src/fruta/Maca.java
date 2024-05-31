@@ -1,2 +1,4 @@
-package fruta;public class Maca {
+package fruta;
+
+public class Maca implements Fruta{
 }

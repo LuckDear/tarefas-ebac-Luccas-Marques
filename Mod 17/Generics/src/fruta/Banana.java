@@ -1,2 +1,4 @@
-package fruta;public class Banana {
+package fruta;
+
+public class Banana implements Fruta{
 }

@@ -1,8 +1,8 @@
-package cadastro.Domain;
+package Domain;
 
 import java.util.Objects;
 
-public class Cliente {
+public class Cliente implements Persistente{
 
     private String nome;
     private Long cpf;
@@ -12,12 +12,12 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    public Cliente(String nome, Long cpf, Long tel, String end, Integer numero, String cidade, String estado) {
+    public Cliente(String nome, String cpf, String tel, String end, String num, String cidade, String estado) {
         this.nome = nome;
-        this.cpf = cpf;
-        this.tel = tel;
+        this.cpf = Long.valueOf(cpf.trim());
+        this.tel = Long.valueOf(tel.trim());
         this.end = end;
-        this.numero = numero;
+        this.numero = Integer.valueOf(num.trim());
         this.cidade = cidade;
         this.estado = estado;
     }
@@ -84,5 +84,10 @@ public class Cliente {
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
         return Objects.equals(cpf, cliente.cpf);
+    }
+
+    @Override
+    public Long getCodigo() {
+        return this.cpf;
     }
 }

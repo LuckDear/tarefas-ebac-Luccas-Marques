@@ -21,24 +21,23 @@ public class Main {
                 String dados = JOptionPane.showInputDialog(null,"Digite o modelo do carro: ", "cadastro", JOptionPane.INFORMATION_MESSAGE);
                 cadastrar(dados);
             } else if (isConsultar(opcao)){
-                String dados = JOptionPane.showInputDialog(null,"Digite o nome do carro: ","Teste",JOptionPane.INFORMATION_MESSAGE);
-                Consultar(dados);
+                Consultar();
             }else if (isExcluir(opcao)){
-                String dados = JOptionPane.showInputDialog(null,"Digite o nome do carro que deseja excluir: ","Excluir",JOptionPane.INFORMATION_MESSAGE);
-                Excluir(dados);
+                Excluir();
             }
             opcao = JOptionPane.showInputDialog(null, "Digite 1 para adicionar um novo modelo, 2 para consultar, 3 para excluir, 4 para sair", "inicio programa", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    private static void Excluir(String dados) {
-        Carros carros = iCarroDAO.excluir(dados);
+    private static void Excluir() {
+        String excluiStr = JOptionPane.showInputDialog(null, "Digite a ID do carro que deseja excluir: ","Excluir",JOptionPane.INFORMATION_MESSAGE);
+        Long excluir = Long.parseLong(excluiStr);
+        Carros carros = iCarroDAO.excluir(excluir);
         if (carros != null){
             JOptionPane.showMessageDialog(null, "Carro excluido com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         }else {
             JOptionPane.showMessageDialog(null, "Carro não encontrado!","Erro",JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
     private static boolean isExcluir(String opcao) {
@@ -55,8 +54,10 @@ public class Main {
         return false;
     }
 
-    private static void Consultar(String dados) {
-        Carros carros = iCarroDAO.consultar(dados);
+    private static void Consultar() {
+        String consultaStr = JOptionPane.showInputDialog(null, "Digite o ID do carro: ","Consultar",JOptionPane.INFORMATION_MESSAGE);
+        Long consulta = Long.parseLong(consultaStr);
+        Carros carros = iCarroDAO.consultar(consulta);
         if (carros != null){
             JOptionPane.showMessageDialog(null,"Carro encontrado: " + carros.toString(),"Sucesso",JOptionPane.INFORMATION_MESSAGE);
         }else {
@@ -72,7 +73,9 @@ public class Main {
     }
 
     private static void cadastrar(String dados) {
-        Carros carros = new Carros(dados);
+        String idStr = JOptionPane.showInputDialog(null, "Digite o ID do carro","Cadastro",JOptionPane.INFORMATION_MESSAGE);
+        Long id = Long.parseLong(idStr);
+        Carros carros = new Carros(dados, id);
         Boolean isCadastrado = iCarroDAO.cadastrar(carros);
         if (isCadastrado){
             JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);

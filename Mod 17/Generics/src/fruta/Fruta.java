@@ -1,2 +1,4 @@
-package fruta;public interface Fruta {
+package fruta;
+
+public interface Fruta {
 }

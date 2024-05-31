@@ -1,2 +1,5 @@
-package Observer;public class Observer {
+package Observer;
+
+public interface Observer {
+    public void update(Subject subject);
 }

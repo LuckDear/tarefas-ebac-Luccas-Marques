@@ -6,7 +6,7 @@ public abstract class GenericDAO<T extends IPersistente> implements IGenericDAO<
 
     protected Map<Class, Map<Long, T>> map;
 
-    public abstract Class<T> getTipoClasse();
+    public abstract Class getTipoClasse();
 
     public abstract void atualizarDados(T entity, T objetoCadastrado);
 
@@ -25,17 +25,14 @@ public abstract class GenericDAO<T extends IPersistente> implements IGenericDAO<
     }
 
     @Override
-    public Carros excluir(String valor) {
-        Map<Long, T> mapaInterno = this.map.get(getTipoClasse());
-        T objetoCadastrado = mapaInterno.get(valor);
-        if (objetoCadastrado != null){
-            this.map.remove(valor, objetoCadastrado);
-        }
-        return null;
+    public Carros excluir(Long valor) {
+        Map mapaInterno = this.map.get(getTipoClasse());
+        T objetoCadastrado = (T) mapaInterno.remove(valor);
+        return (Carros) objetoCadastrado;
     }
 
     @Override
-    public T consultar(String valor) {
+    public T consultar(Long valor) {
         Map<Long, T> mapaInterno = this.map.get(getTipoClasse());
         return mapaInterno.get(valor);
     }

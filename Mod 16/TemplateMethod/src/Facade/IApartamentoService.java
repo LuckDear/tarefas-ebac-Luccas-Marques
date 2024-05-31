@@ -1,5 +1,5 @@
 package Facade;
 
-public interface IApartamento {
+public interface IApartamentoService {
     public Boolean cadastrarApartamento(Apartamento apartamento);
 }
