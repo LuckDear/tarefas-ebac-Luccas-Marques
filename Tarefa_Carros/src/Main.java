@@ -38,7 +38,8 @@ public class Main {
 
             } else if (isConsultar(opcao)){
                 //Consultar();
-                JOptionPane.showMessageDialog(null,carros1.toString());
+                JOptionPane.showMessageDialog(null,"Lista de carros 1: \n" + carros1.toString());
+                JOptionPane.showMessageDialog(null,"Lista de carros 2: \n" + carros1.toString());
             }else if (isExcluir(opcao)){
                 Excluir();
             }
