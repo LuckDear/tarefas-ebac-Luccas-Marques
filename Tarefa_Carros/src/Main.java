@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -6,6 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
         iCarroDAO = new CarroMapDAO();
+        ArrayList<Carros> carros1 = new ArrayList<>();
+        ArrayList<Carros> carros2 = new ArrayList<>();
 
         String opcao = JOptionPane.showInputDialog(null, "Digite 1 para adicionar um novo modelo, 2 para consultar, 3 para excluir, 4 para sair", "inicio programa", JOptionPane.INFORMATION_MESSAGE);
 
@@ -19,9 +22,23 @@ public class Main {
                 sair();
             }else if (isCadastrado(opcao)){
                 String dados = JOptionPane.showInputDialog(null,"Digite o modelo do carro: ", "cadastro", JOptionPane.INFORMATION_MESSAGE);
-                cadastrar(dados);
+                String idStr = JOptionPane.showInputDialog(null, "Digite o ID do carro","Cadastro",JOptionPane.INFORMATION_MESSAGE);
+                Long id = Long.parseLong(idStr);
+                cadastrar(dados, id);
+
+                Toyota carro = new Toyota(dados,id);
+                Honda carro2 = new Honda(dados,id);
+                carros1.add(carro);
+                carros2.add(carro2);
+                for (int i = 0; i < carros1.size(); i++){
+                    System.out.println(carros1);
+                }
+                for (int i = 0; i < carros2.size(); i++){
+                    System.out.println(carros2);
+                }
             } else if (isConsultar(opcao)){
-                Consultar();
+                //Consultar();
+                JOptionPane.showMessageDialog(null,carros1.toString());
             }else if (isExcluir(opcao)){
                 Excluir();
             }
@@ -72,9 +89,8 @@ public class Main {
         return false;
     }
 
-    private static void cadastrar(String dados) {
-        String idStr = JOptionPane.showInputDialog(null, "Digite o ID do carro","Cadastro",JOptionPane.INFORMATION_MESSAGE);
-        Long id = Long.parseLong(idStr);
+    private static void cadastrar(String dados, Long id) {
+
         Carros carros = new Carros(dados, id);
         Boolean isCadastrado = iCarroDAO.cadastrar(carros);
         if (isCadastrado){
