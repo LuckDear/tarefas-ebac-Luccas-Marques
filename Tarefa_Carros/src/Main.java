@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     private static ICarroDAO iCarroDAO;
+    private static List carros1 = new ArrayList<>();
+    private static List carros2 = new ArrayList<>();
 
     public static void main(String[] args) {
         iCarroDAO = new CarroMapDAO();
-        ArrayList<Carros> carros1 = new ArrayList<>();
-        ArrayList<Carros> carros2 = new ArrayList<>();
 
         String opcao = JOptionPane.showInputDialog(null, "Digite 1 para adicionar um novo modelo, 2 para consultar, 3 para excluir, 4 para sair", "inicio programa", JOptionPane.INFORMATION_MESSAGE);
 
@@ -30,12 +31,11 @@ public class Main {
                 Honda carro2 = new Honda(dados,id);
                 carros1.add(carro);
                 carros2.add(carro2);
-                for (int i = 0; i < carros1.size(); i++){
-                    System.out.println(carros1);
-                }
-                for (int i = 0; i < carros2.size(); i++){
-                    System.out.println(carros2);
-                }
+
+                System.out.println(carros1);
+
+                System.out.println(carros2);
+
             } else if (isConsultar(opcao)){
                 //Consultar();
                 JOptionPane.showMessageDialog(null,carros1.toString());
@@ -51,10 +51,13 @@ public class Main {
         Long excluir = Long.parseLong(excluiStr);
         Carros carros = iCarroDAO.excluir(excluir);
         if (carros != null){
+            carros1.removeIf(carros1 -> carros.getId().equals(excluir));
+            carros2.removeIf(carros2 -> carros.getId().equals(excluir));
             JOptionPane.showMessageDialog(null, "Carro excluido com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         }else {
             JOptionPane.showMessageDialog(null, "Carro não encontrado!","Erro",JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 
     private static boolean isExcluir(String opcao) {
