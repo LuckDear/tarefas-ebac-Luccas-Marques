@@ -1,11 +1,11 @@
-package Testes;
+package br.com.lmarques;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PrimeiroTeste.class, SegundoTeste.class})
+@SuiteClasses({ClientServiceTest.class, ContratoServiceTest.class})
 
 public class AllTests {
 

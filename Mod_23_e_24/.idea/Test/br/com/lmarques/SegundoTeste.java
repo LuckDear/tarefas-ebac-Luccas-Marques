@@ -1,4 +1,4 @@
-package Testes;
+package br.com.lmarques;
 
 import org.junit.Assert;
 import org.junit.Test;

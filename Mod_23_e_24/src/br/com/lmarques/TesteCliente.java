@@ -1,3 +1,5 @@
+package br.com.lmarques;
+
 public class TesteCliente {
         private String nome;
 

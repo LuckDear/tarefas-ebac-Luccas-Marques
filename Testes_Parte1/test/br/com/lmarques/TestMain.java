@@ -3,30 +3,33 @@ package br.com.lmarques;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.List;
 
 public class TestMain {
     @Test
-            public void validaFeminino() {
+    public void validaFeminino() {
+        ProcessaNome processa = new ProcessaNome();
+        String entrada = "joao -m, joana -f, maria -f, cleber -m";
 
-        String userInput = String.format("luccas -m, lua -f, fabi -f, julia -f, joao -m, fagner -m", System.lineSeparator(), System.lineSeparator());
-        ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(bais);
+        List<String> feminino = processa.processaNomesFemininos(entrada);
+        Assert.assertEquals(2, feminino.size());
 
-        String esperada = "lua -f, fabi -f, julia -f";
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(baos);
-        System.setOut(printStream);
-
-        Main.main(null);
-
-        String[] linhas = baos.toString().split(System.lineSeparator());
-        String atual = linhas[linhas.length-1];
-
-        Assert.assertEquals(esperada, atual);
-
+        Assert.assertTrue(feminino.stream().allMatch(f -> f.endsWith("f")));
+        boolean consulta = processa.verificaTodosFemininos(entrada);
+        Assert.assertFalse(consulta);
     }
 
+    @Test
+    public void validaMasculino(){
+        ProcessaNome processa = new ProcessaNome();
+        String entrada = "joao -m, joana -f, maria -f, cleber -m";
+
+        List<String> masculino = processa.processaNomesMasculinos(entrada);
+        Assert.assertEquals(2,masculino.size());
+
+        Assert.assertTrue(masculino.stream()
+                .allMatch(m -> m.endsWith("m")));
+        boolean consulta = processa.verificaTodosMasculinos(entrada);
+        Assert.assertFalse(consulta);
+    }
 }

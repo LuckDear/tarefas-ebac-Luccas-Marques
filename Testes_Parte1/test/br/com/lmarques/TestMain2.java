@@ -7,29 +7,33 @@ import java.util.List;
 
 public class TestMain2 {
     @Test
-    public void validaFeminino() {
-        ProcessaNome processa = new ProcessaNome();
-        String entrada = "joao -m, joana -f, maria -f, cleber -m";
+    public void validaFeminino(){
+        DivideNomes nomes = new DivideNomes();
 
-        List<String> feminino = processa.processaNomesFemininos(entrada);
+        String amostra = "joao -m, joana -f, maria -f, cleber -m";
+
+        List<String> feminino = nomes.divideFeminino(amostra);
         Assert.assertEquals(2, feminino.size());
 
-        Assert.assertTrue(feminino.stream().allMatch(f -> f.endsWith("f")));
-        boolean consulta = processa.verificaTodosFemininos(entrada);
-        Assert.assertFalse(consulta);
+        Assert.assertTrue(feminino.stream()
+                .allMatch(f -> f.endsWith("f")));
+        boolean consultaFeminino = nomes.consultaFeminino(amostra);
+        Assert.assertFalse(consultaFeminino);
     }
 
     @Test
     public void validaMasculino(){
-        ProcessaNome processa = new ProcessaNome();
-        String entrada = "joao -m, joana -f, maria -f, cleber -m";
+        DivideNomes nomes = new DivideNomes();
 
-        List<String> masculino = processa.processaNomesMasculinos(entrada);
-        Assert.assertEquals(2,masculino.size());
+        String amostra = "joao -m, joana -f, maria -f, cleber -m";
+
+        List<String> masculino = nomes.divideMasculino(amostra);
+        Assert.assertEquals(2, masculino.size());
 
         Assert.assertTrue(masculino.stream()
                 .allMatch(m -> m.endsWith("m")));
-        boolean consulta = processa.verificaTodosMasculinos(entrada);
-        Assert.assertFalse(consulta);
+        boolean consultaMasculino = nomes.consultaMasculino(amostra);
+        Assert.assertFalse(consultaMasculino);
     }
+
 }
